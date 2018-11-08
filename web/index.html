@@ -1,0 +1,151 @@
+<head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css"/>
+    <link rel="stylesheet" href="css/my.css"">
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"
+            integrity="sha256-CutOzxCRucUsn6C6TcEYsauvvYilEniTXldPa6/wu0k="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sammy.js/0.7.6/sammy.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.min.js"></script>
+
+    <script src="js/ko-rest.js"></script>
+    <script src="js/fr-viewmodel.js"></script>
+</head>
+<body>
+<div class="container">
+    <br>
+    <div class="card">
+        <h5 class="card-header">Feature Request Application</h5>
+        <div class="card-body">
+            <div class="card-title">
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <strong>Message:</strong> <span id="message">Welcome to the system.</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+
+            </div>
+            <div data-bind="if: view_list">
+
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Product Area</th>
+                        <th>Client Id</th>
+                        <th>Client Priority</th>
+                        <th>Date Target</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody data-bind="foreach: frList">
+                    <tr data-bind="click: $root.goToNewEdit.bind($data, $data.id())">
+                        <td data-bind="text: id"></td>
+                        <td data-bind="text: title"></td>
+                        <td data-bind="text: description"></td>
+                        <td data-bind="text: $parent.getAreaById($data.product_area())"></td>
+                        <td data-bind="text: $parent.getClientById($data.client_id())"></td>
+                        <td data-bind="text: client_priority"></td>
+                        <td data-bind="text: date_target"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <a href="#" class="btn btn-primary pull-right" data-bind="click: $root.goToNewEdit.bind($data, '-1')">New
+                    Request</a>
+            </div>
+            <div data-bind="if: view_one">
+                <form>
+                    <div class="form-group">
+                        <label for="data_title">Title</label>
+                        <input type="text" data-bind="value: title" class="form-control" id="data_title"
+                               placeholder="Title" >
+
+
+
+                    </div>
+                    <div class="form-group">
+                        <label for="data_desc">Description</label>
+                        <textarea type="text" data-bind="value: description" class="form-control" id="data_desc"
+                                  placeholder="Description"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="data_client">Client</label>
+                            <select class="form-control"  data-bind="options: clients_to_map(),
+                                                                    optionsText: 'client',
+                                                                    optionsValue:'idx',
+                                                                    value: client_id,
+                                                                    optionsCaption: 'Choose the client...'"
+                                    id="data_client">
+                            </select>
+
+                        </div>
+                        <div class="form-group col">
+                            <label for="data_client_priority">Client Priority</label>
+                            <input type="text" data-bind="value: client_priority" class="form-control"
+                                   id="data_client_priority"
+                                   placeholder="Priority" >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="data_product_area">Product Area</label>
+                            <select class="form-control"  data-bind="options: areas_to_map(),
+                                                                    optionsText: 'area',
+                                                                    optionsValue:'idx',
+                                                                    value: product_area ,
+                                                                    optionsCaption: 'Choose Area...'"
+                                    id="data_product_area'">
+
+                            </select>
+
+                        </div>
+                        <div class="form-group col" data-provider="datepicker">
+                            <label for="data_date_target">Date Target</label>
+                            <input type="text" data-bind="datePicker: date_target"
+                                   class="form-control datepicker"
+                                   id="data_date_target"
+                                   placeholder="Date Target" >
+                            
+                        </div>
+                    </div>
+                </form>
+                <a href="#" class="btn btn-info pull-right" data-bind="click: $root.goToList">Back To List</a>
+                <span data-bind="if: id"><a href="#" class="btn btn-danger pull-right" data-bind="click: $root.delete">Delete</a></span>
+                <a href="#" class="btn btn-primary pull-right" data-bind="click: $root.save">Save</a>
+            </div>
+
+        </div>
+
+        <div class="card-footer text-muted">
+            <footer class="blockquote-footer">By <cite title="Source Title">Javier Guignard</cite></footer>
+        </div>
+
+    </div>
+
+
+    <br/>
+
+</div>
+</body>
