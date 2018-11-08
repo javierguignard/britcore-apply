@@ -6,7 +6,7 @@ const url = '';
 
 ko.validation.rules['is_date'] = {
     validator: function (val) {
-        var dt = moment(val, 'YYYY-MM-DD')
+        var dt = moment(val, 'YYYY-MM-DD');
         console.log(dt);
         return dt.isValid();
     },
@@ -114,9 +114,9 @@ function frViewModel() {
         self.description('');
         self.client_id('');
         self.client_priority('');
-        self.product_area('')
+        self.product_area('');
         self.date_target(new Date())
-    }
+    };
 
     self.load_model = function (id) {
         /*
@@ -124,7 +124,7 @@ function frViewModel() {
          */
         var model = self.getFrById(parseInt(id));
         if (model == '') {
-            self.clear_model()
+            self.clear_model();
             return false;
         }
 
@@ -133,9 +133,9 @@ function frViewModel() {
         self.description(model.description());
         self.client_id(model.client_id());
         self.client_priority(model.client_priority());
-        self.product_area(model.product_area())
+        self.product_area(model.product_area());
         self.date_target(model.date_target())
-    }
+    };
     self.getFrById = function (id) {
         /*
         GET MODEL FROM LIST
@@ -159,10 +159,10 @@ function frViewModel() {
                     self.goToList();
                 }
             });
-    }
+    };
 
     self.save = function () {
-        var dt = moment(self.date_target()).format('YYYY-MM-DD')
+        var dt = moment(self.date_target()).format('YYYY-MM-DD');
         data = {
             title: self.title(),
             description: self.description(),
@@ -170,7 +170,7 @@ function frViewModel() {
             client_priority: self.client_priority(),
             product_area: self.product_area(),
             date_target: dt,
-        }
+        };
         if (self.id() > 0) {
             //Update item
             $.ajax({
@@ -212,7 +212,7 @@ function frViewModel() {
 
         }
 
-    }
+    };
 
 
     //CONSUME REST API
@@ -224,7 +224,6 @@ function frViewModel() {
             if (i.startsWith('__')) {
                 continue
             }
-            ;
             var map = {};
             map.idx = i;
             map.client = self.list_of_clients()[i];
@@ -235,11 +234,11 @@ function frViewModel() {
 
     };
     self.getClientById = function (id) {
-        var client = 'not found'
+        var client = 'not found';
         for (i in self.list_of_clients()) {
             if (i == id) {
                 client = self.list_of_clients()[i]();
-                continue;
+
             }
 
         }
@@ -253,7 +252,6 @@ function frViewModel() {
             if (i.startsWith('__')) {
                 continue
             }
-            ;
             var map = {};
             map.idx = i;
             map.area = self.list_of_areas()[i];
@@ -262,13 +260,13 @@ function frViewModel() {
         }
         return lst;
 
-    }
+    };
     self.getAreaById = function (id) {
-        var client = 'not found'
+        var client = 'not found';
         for (i in self.list_of_areas()) {
             if (i == id) {
                 client = self.list_of_areas()[i]();
-                continue;
+
             }
 
         }
@@ -303,7 +301,7 @@ function frViewModel() {
             }
         }
         return null;
-    }
+    };
 
 
     //MAKE AS ONE PAGE
@@ -358,8 +356,8 @@ function create_message_type(message, type){
     $('#message').html(message);
     $('.alert').removeClass('alert-info');
     $('.alert').removeClass('alert-waning');
-    $('.alert').addClass('alert-'+ type)
-    $('.alert').show()
+    $('.alert').addClass('alert-'+ type);
+    $('.alert').show();
     setTimeout(function(){$('.alert').hide()}, 2000);
 
 }

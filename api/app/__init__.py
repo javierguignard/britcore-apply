@@ -15,7 +15,6 @@ from flask_bcrypt import Bcrypt
 # initialize db
 db = SQLAlchemy()
 
-
 def create_app(config_name):
     from app.models import FeatureRequest
 
@@ -46,6 +45,7 @@ def create_app(config_name):
                 '2': 'Client B',
                 '8': 'Client C',
             }
+
     @app.route('/api/clients/', methods=['GET'])
     def dummy_clients():
         if request.method == "GET":
