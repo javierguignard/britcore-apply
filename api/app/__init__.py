@@ -78,7 +78,7 @@ def create_app(config_name):
                     response = jsonify({
                         'message': 'Exists priority {} for client "{}" '.format(client_priority, DUMMY_CLIENT_MAP[client_id])
                         })
-                    return make_response(response),400
+                    return make_response(response),402
                 fr = FeatureRequest(title=str(title))
                 fr.description = description
                 fr.product_area = str(product_area)
@@ -140,7 +140,7 @@ def create_app(config_name):
             r.headers.add('Access-Control-Allow-Origin', '*')
             return r, 401
 
-    @app.route('/api/feature_requests/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+    @app.route('/api/feature_requests/<int:id>/', methods=['GET', 'PUT', 'DELETE'])
     def feature_requests_manipulation(id, **kwargs):
         print(request)
         fr = FeatureRequest.query.filter_by(id=id).first()
@@ -169,7 +169,7 @@ def create_app(config_name):
             r.headers.add('Access-Control-Allow-Origin', '*')
             return r, 200
 
-        elif request.method == 'PUT' or request.method == 'OPTIONS':
+        elif request.method == 'PUT':
 
             title = request.data.get('title', False)
             description = request.data.get('description', False)
