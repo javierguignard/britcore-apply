@@ -3,4 +3,4 @@
 .idea/
 migrations/
 *.db
-old.py
+*old.py
