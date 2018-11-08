@@ -1,3 +1,5 @@
 #Add ignore files patterns
 *.pyc
 .idea/
+migrations/
+*.db
