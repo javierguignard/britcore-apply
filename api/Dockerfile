@@ -15,8 +15,6 @@ WORKDIR /app
 
 RUN python3.6 -m pip install --no-cache-dir -r requirements.txt
 
-RUN chmod +x db_migrations
-
 RUN python3.6 manage.py db init; exit 0
 RUN python3.6 manage.py db migrate; exit 0
 RUN python3.6 manage.py db upgrade; exit 0
