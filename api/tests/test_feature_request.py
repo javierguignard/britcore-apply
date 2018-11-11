@@ -57,7 +57,7 @@ class FeatureRequestTestCase(unittest.TestCase):
         self.assertEqual(rv.status_code, 201)
         results = json.loads(rv.data.decode())
         print(results['id'])
-        result = self.client().get('/api/feature_requests/{}'.format(results['id']))
+        result = self.client().get('/api/feature_requests/{}/'.format(results['id']))
         self.assertEqual(result.status_code, 200)
         self.assertIn('New FR', str(result.data))
 
@@ -68,13 +68,13 @@ class FeatureRequestTestCase(unittest.TestCase):
         # get the json with the feature_request
         results = json.loads(rv.data.decode())
         rv = self.client().put(
-            '/api/feature_requests/{}'.format(results['id']),
+            '/api/feature_requests/{}/'.format(results['id']),
             data={
                 "title": "NEW FR ON TESTING"
             })
         self.assertEqual(rv.status_code, 200)
         results = self.client().get(
-            '/api/feature_requests/{}'.format(results['id']))
+            '/api/feature_requests/{}/'.format(results['id']))
         self.assertIn('NEW FR ON TESTING', str(results.data))
 
     def test_feature_request_deletion(self):
@@ -84,10 +84,10 @@ class FeatureRequestTestCase(unittest.TestCase):
         # get the feature_request in json
         results = json.loads(rv.data.decode())
         id_delete = results['id']
-        res = self.client().delete('/api/feature_requests/{}'.format(id_delete))
+        res = self.client().delete('/api/feature_requests/{}/'.format(id_delete))
         self.assertEqual(res.status_code, 200)
         # Test to see if it exists, should return a 404
-        result = self.client().get('/api/feature_requests/{}'.format(id_delete))
+        result = self.client().get('/api/feature_requests/{}/'.format(id_delete))
         self.assertEqual(result.status_code, 404)
 
 
