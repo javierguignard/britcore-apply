@@ -72,13 +72,13 @@ def create_app(config_name):
                 date_target = None
 
             if title and product_area and client_id and date_target:
-                fr = FeatureRequest.query.filter_by(client_id=client_id, client_priority=client_priority).first()
-
-                if fr is not None:
-                    response = jsonify({
-                        'message': 'Exists priority {} for client "{}" '.format(client_priority, DUMMY_CLIENT_MAP[client_id])
-                        })
-                    return make_response(response),402
+                # fr = FeatureRequest.query.filter_by(client_id=client_id, client_priority=client_priority).first()
+                #
+                # if fr is not None:
+                #     response = jsonify({
+                #         'message': 'Exists priority {} for client "{}" '.format(client_priority, DUMMY_CLIENT_MAP[client_id])
+                #         })
+                #     return make_response(response),402
                 fr = FeatureRequest(title=str(title))
                 fr.description = description
                 fr.product_area = str(product_area)
