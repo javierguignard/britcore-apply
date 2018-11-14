@@ -1,4 +1,4 @@
-# FRONTEND FOR BRITCORE PROJECT
+# FRONTEND FOR BRITECORE PROJECT
 Front end for FeatureRequest interactions
 
 

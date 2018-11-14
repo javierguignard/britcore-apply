@@ -1,4 +1,4 @@
-# REST API FOR BRITCORE PROJECT
+# REST API FOR BRITECORE PROJECT
 A flask-driven restful API for FeatureRequest interactions
 
 * #### Environment Variables

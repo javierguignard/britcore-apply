@@ -1,6 +1,6 @@
-# This is the project for Britcore Engineering Application
+# This is the project for Britecore Engineering Application
 
-This project is for apply to job on Britcore enterprise.
+This project is for apply to job on Britecore enterprise.
 Contains two parts, API and Frontend. 
 
 ## Restful API  
