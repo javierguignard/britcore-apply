@@ -93,7 +93,7 @@ def create_app(config_name):
                     feature_to_update = FeatureRequest.query.filter_by(client_id=client_id,
                                                                        client_priority=priority_to_update).order_by(
                         'id').first()
-                    feature_to_update.client_priority = feature_to_update.priority + 1
+                    feature_to_update.client_priority = feature_to_update.client_priority + 1
                     priority_to_update = priority_to_update + 1
                     feature_to_update.save()
                     features_to_update_count = FeatureRequest.query.filter_by(client_id=client_id,
