@@ -17,7 +17,7 @@ ko.validation.rules['positive_field'] = {
     validator: function (val) {
         return !(isNaN(parseInt(val))) && parseInt(val) > 0;
     },
-    message: 'The field is not a date (use format(\'YYYY-MM-DD\')'
+    message: 'The field needs a positive integer greater than 0'
 };
 
 ko.validation.registerExtenders();
