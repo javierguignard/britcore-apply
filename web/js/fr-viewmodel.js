@@ -12,6 +12,14 @@ ko.validation.rules['is_date'] = {
     },
     message: 'The field is not a date (use format(\'YYYY-MM-DD\')'
 };
+
+ko.validation.rules['positive_field'] = {
+    validator: function (val) {
+        return !(isNaN(parseInt(val))) && parseInt(val) > 0;
+    },
+    message: 'The field is not a date (use format(\'YYYY-MM-DD\')'
+};
+
 ko.validation.registerExtenders();
 
 ko.extenders.numeric = function(target, precision) {
@@ -101,7 +109,7 @@ function frViewModel() {
     self.title = ko.observable().extend({ required: true });
     self.description = ko.observable();
     self.client_id = ko.observable().extend({ required: true });
-    self.client_priority = ko.observable().extend({ numeric: 0,required: true });
+    self.client_priority = ko.observable().extend({ numeric: 1,positive_field:true, required: true });
     self.product_area = ko.observable().extend({ required: true });
     self.date_target = ko.observable().extend({ is_date: true,required: true });
 
@@ -113,7 +121,7 @@ function frViewModel() {
         self.title('');
         self.description('');
         self.client_id('');
-        self.client_priority('');
+        self.client_priority(1);
         self.product_area('');
         self.date_target(new Date())
     };
